@@ -125,7 +125,7 @@ group.add(bar3);
  const bar4Geometry = new THREE.BoxGeometry(0.05, 1.3, 0.2);
  const bar4Material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
  const bar4 = new THREE.Mesh(bar4Geometry, bar4Material);
- bar4.position.set(1.1, 1.5, 0);
+ bar4.position.set(1.1, 1.5, -0.05);
  group.add(bar4);
  //Barra vertical 2
  const bar5 = new THREE.Mesh(bar4Geometry, bar4Material);
@@ -143,11 +143,11 @@ bar7.position.set(1.1, 1.85, 0.56);
 bar7.rotation.z = Math.PI / 2; 
 group.add(bar7);
 const bar8 = new THREE.Mesh(bar6Geometry, bar6Material);
-bar8.position.set(1.1, 2.15, 0);
+bar8.position.set(1.1, 2.15, -0.05);
 bar8.rotation.z = Math.PI / 2; 
 group.add(bar8);
 const bar9 = new THREE.Mesh(bar6Geometry, bar6Material);
-bar9.position.set(1.1, 0.85, 0);
+bar9.position.set(1.1, 0.85, -0.05);
 bar9.rotation.z = Math.PI / 2; 
 group.add(bar9);
 
@@ -170,13 +170,21 @@ group.add(bar12);
 
 //Espaçadores
 const bar13= new THREE.Mesh(bar6Geometry, bar6Material);
-bar13.position.set(1.05, 1.845, 0.55);
+bar13.position.set(1.05, 2.157, -0.045);
 bar13.rotation.z = Math.PI / 2; 
 group.add(bar13);
 const bar14= new THREE.Mesh(bar6Geometry, bar6Material);
-bar14.position.set(1.15, 1.845, 0.55);
+bar14.position.set(1.15, 2.15, -0.045);
 bar14.rotation.z = Math.PI / 2; 
 group.add(bar14);
+
+//Parafuso
+const bar15Geometry = new THREE.CylinderGeometry(0.1, 0.1, 0.05, 32); 
+const bar15Material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+const bar15 = new THREE.Mesh(bar15Geometry, bar15Material);
+bar15.position.set(1.1, 0.55, 0.56);
+bar15.rotation.z = Math.PI / 2; 
+group.add(bar15);
 
     return group;
 }
