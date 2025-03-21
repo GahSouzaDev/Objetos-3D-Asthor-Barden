@@ -212,13 +212,24 @@ function createCancela() {
     const tip = new THREE.Mesh(tipGeometry, screwMaterial);
     tip.position.set(0, -0.11, 0); // Abaixo do corpo
     tip.rotation.z = Math.PI / 1;
-    screwGroup.add(tip);
-    screwGroup.add(tip);
+    screwGroup.add(tip);    
 
     // Posicionar e rotacionar o parafuso
-    screwGroup.position.set(1.11, 0.85, -0.05);
+    screwGroup.position.set(1.15, 0.85, -0.05);
     screwGroup.rotation.z = Math.PI / -2;
     group.add(screwGroup);
+
+    //Palitos
+    const bar15Geometry = new THREE.CylinderGeometry(0.015, 0.015, 0.25, 32);
+    const bar15Material = new THREE.MeshPhongMaterial({ color: 0xD2B48C});
+    const bar15 = new THREE.Mesh(bar15Geometry, bar15Material);
+    bar15.position.set(1.08, 2.155, -0.05);
+    bar15.rotation.z = Math.PI / 2;
+    group.add(bar15);    
+    const bar16 = new THREE.Mesh(bar15Geometry, bar15Material);
+    bar16.position.set(1.025, 1.8, 0.6);
+    bar16.rotation.z = Math.PI / 2;
+    group.add(bar16);
 
     return group;
 }
