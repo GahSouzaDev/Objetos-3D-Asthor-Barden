@@ -276,5 +276,13 @@ function createCancela() {
     bar25.rotation.z = Math.PI / 2;
     group.add(bar25);
 
+    // Aste servo motor
+    const bar26Geometry = new THREE.BoxGeometry(0.05, 0.3, 0.05);
+    const bar26Material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+    const bar26 = new THREE.Mesh(bar26Geometry, bar26Material);
+    bar26.position.set(1.15, 0.75, 0.56);
+    bar26.rotation.x = Math.PI / 1;
+    group.add(bar26);
+
     return group;
 }
