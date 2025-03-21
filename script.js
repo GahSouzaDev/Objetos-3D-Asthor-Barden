@@ -13,7 +13,7 @@ controls.dampingFactor = 0.05;
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.set(2, 5, 5);
+directionalLight.position.set(2, 3, 5);
 scene.add(directionalLight);
 
 // Variável para armazenar o modelo atual
