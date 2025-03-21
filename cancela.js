@@ -249,8 +249,8 @@ const alphaTextureBack = new THREE.CanvasTexture(canvasBack);
     group.add(screwGroup);
 
     //Palitos
-    const bar15Geometry = new THREE.CylinderGeometry(0.015, 0.015, 0.25, 32);
-    const bar15Material = new THREE.MeshPhongMaterial({ color: 0xD2B48C});
+    const bar15Geometry = new THREE.CylinderGeometry(0.016, 0.016, 0.25, 32);
+    const bar15Material = new THREE.MeshPhongMaterial({ color: 0xA67B5B});
     const bar15 = new THREE.Mesh(bar15Geometry, bar15Material);
     bar15.position.set(1.08, 2.155, -0.05);
     bar15.rotation.z = Math.PI / 2;
