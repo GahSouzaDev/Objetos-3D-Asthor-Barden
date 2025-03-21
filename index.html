@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador 3D de Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="menu-hamburger">☰</div>
+        <nav class="menu">
+            <ul>
+                <li data-model="cancela">Cancela</li>
+                <li data-model="ceres">Ceres</li>
+                <li data-model="agricultor">Agricultor</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <canvas id="canvas"></canvas>
+    </main>
+    <footer>
+        <p>Visualizador 3D - Projetos de Sala de Aula</p>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/controls/OrbitControls.js"></script>
+    <script src="cancela.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
