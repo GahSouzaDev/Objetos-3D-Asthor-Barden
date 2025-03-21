@@ -4,20 +4,49 @@ function createCancela() {
     // Criar o loader de texturas
     const textureLoader = new THREE.TextureLoader();
 
-    // Base da cancela com textura
-    const baseGeometry = new THREE.BoxGeometry(3.5, 0.2, 2);
+    // Base da cancela com textura e furos nas faces Z
+    const baseGeometry = new THREE.BoxGeometry(3.5, 0.6, 2);
     const baseTexture = textureLoader.load('tx-md1.png');
     baseTexture.wrapS = THREE.RepeatWrapping;
     baseTexture.wrapT = THREE.RepeatWrapping;
     baseTexture.repeat.set(1, 1);
+// Criar textura com furo quadrado para a face frontal (z positivo)
+const canvasFront = document.createElement('canvas');
+canvasFront.width = 256;
+canvasFront.height = 256;
+const contextFront = canvasFront.getContext('2d');
+contextFront.fillStyle = 'rgba(255, 255, 255, 1)';
+contextFront.fillRect(0, 0, 256, 256);
+contextFront.globalCompositeOperation = 'destination-out';
+contextFront.fillStyle = 'rgba(0, 0, 0, 1)';
+contextFront.fillRect(205 - 20, 128 - 20, 25, 60); // Furo quadrado (retângulo) centralizado
+const alphaTextureFront = new THREE.CanvasTexture(canvasFront);
 
-    const baseMaterial = new THREE.MeshPhongMaterial({ 
-        map: baseTexture,
-        color: 0x8B4513,
-        shininess: 30
-    });
-    const base = new THREE.Mesh(baseGeometry, baseMaterial);
-    base.position.y = -0.1;
+// Criar textura com furo oval para a face traseira (z negativo)
+const canvasBack = document.createElement('canvas');
+canvasBack.width = 256;
+canvasBack.height = 256;
+const contextBack = canvasBack.getContext('2d');
+contextBack.fillStyle = 'rgba(255, 255, 255, 1)';
+contextBack.fillRect(0, 0, 256, 256);
+contextBack.globalCompositeOperation = 'destination-out';
+contextBack.beginPath();
+contextBack.ellipse(58, 200 - 80, 8.5, 30, 0, 0, Math.PI * 2); // Furo oval centralizado
+contextBack.fill();
+const alphaTextureBack = new THREE.CanvasTexture(canvasBack);
+
+    // Materiais para cada face da base (6 faces no total)
+    const baseMaterials = [
+        new THREE.MeshPhongMaterial({ map: baseTexture, color: 0x8B4513, shininess: 30 }), // +x
+        new THREE.MeshPhongMaterial({ map: baseTexture, color: 0x8B4513, shininess: 30 }), // -x
+        new THREE.MeshPhongMaterial({ map: baseTexture, color: 0x8B4513, shininess: 30 }), // +y
+        new THREE.MeshPhongMaterial({ map: baseTexture, color: 0x8B4513, shininess: 30 }), // -y
+        new THREE.MeshPhongMaterial({ map: baseTexture, alphaMap: alphaTextureFront, transparent: true, color: 0x8B4513, shininess: 30 }), // +z (frente, furo quadrado)
+        new THREE.MeshPhongMaterial({ map: baseTexture, alphaMap: alphaTextureBack, transparent: true, color: 0x8B4513, shininess: 30 })  // -z (trás, furo redondo)
+    ];
+
+    const base = new THREE.Mesh(baseGeometry, baseMaterials);
+    base.position.y = -0.3;
     group.add(base);
 
     // Base vertical com texturas por face e furos nas laterais
@@ -284,5 +313,84 @@ function createCancela() {
     bar26.rotation.x = Math.PI / 1;
     group.add(bar26);
 
-    return group;
+    //Bloco
+    // Servo motor
+    const bar27Geometry = new THREE.BoxGeometry(1.3, 0.7, 1.3);
+    const bar27Material = new THREE.MeshPhongMaterial({ 
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.3
+    });       
+    const bar27 = new THREE.Mesh(bar27Geometry, bar27Material);
+    bar27.position.set(-0.7, 0.2, 0);
+    group.add(bar27);
+
+       // Aste servo motor
+       // Aste servo motor
+const bar28Geometry = new THREE.BoxGeometry(1.25, 0.05, 1.25);
+
+// Criar o loader de texturas
+const textureLoader1 = new THREE.TextureLoader();
+const topTexture = textureLoader1.load('Press Switch.png'); // Substitua pelo caminho da textura
+topTexture.wrapS = THREE.RepeatWrapping;
+topTexture.wrapT = THREE.RepeatWrapping;
+topTexture.repeat.set(1, 1); // Ajuste a repetição conforme necessário
+
+// Materiais para cada face (6 faces no total)
+const bar28Materials = [
+    new THREE.MeshPhongMaterial({ color: 0xFFFFFF }), // +X
+    new THREE.MeshPhongMaterial({ color: 0xFFFFFF }), // -X
+    new THREE.MeshPhongMaterial({ color: 0xFFFFFF }), // +Y (ficará para baixo após rotação)
+    new THREE.MeshPhongMaterial({ map: topTexture, color: 0xFFFFFF }), // -Y (face superior visível após rotação)
+    new THREE.MeshPhongMaterial({ color: 0xFFFFFF }), // +Z
+    new THREE.MeshPhongMaterial({ color: 0xFFFFFF })  // -Z
+];
+
+const bar28 = new THREE.Mesh(bar28Geometry, bar28Materials);
+bar28.position.set(-0.7, 0.3, 0);
+bar28.rotation.x = Math.PI / 1; // Rotação de 180 graus no eixo X
+group.add(bar28);
+
+ // Arredondamento das pontas (cilíndrica)
+ const bar29Geometry = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 32);
+ const bar29Material = new THREE.MeshPhongMaterial({ color: 0x000000 });
+ const bar29 = new THREE.Mesh(bar29Geometry, bar29Material);
+ bar29.position.set(-0.7, 0.5, 0);
+ bar29.rotation.z = Math.PI / 1;
+ group.add(bar29);
+
+ // Arredondamento das pontas (cilíndrica com furo no meio)
+const shape = new THREE.Shape();
+shape.absarc(0, 0, 0.1, 0, Math.PI * 2, false); // Círculo externo (raio 0.1)
+
+const hole = new THREE.Path();
+hole.absarc(0, 0, 0.05, 0, Math.PI * 2, true); // Círculo interno (furo com raio 0.05)
+shape.holes.push(hole); // Adiciona o furo ao shape
+
+const bar30Geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: 0.3, // Altura do cilindro (mesma do original)
+    bevelEnabled: false // Sem bordas arredondadas
+});
+const bar30Material = new THREE.MeshPhongMaterial({ color: 0xFFD700 });
+const bar30 = new THREE.Mesh(bar30Geometry, bar30Material);
+bar30.position.set(-1.1, 0.6, -0.4);
+bar30.rotation.x = Math.PI / 2;
+group.add(bar30);
+const bar31 = new THREE.Mesh(bar30Geometry, bar30Material);
+bar31.position.set(-1.1, 0.6, 0.4);
+bar31.rotation.x = Math.PI / 2;
+group.add(bar31);
+
+const bar32Material = new THREE.MeshPhongMaterial({ color: 0x4169E1});
+const bar32 = new THREE.Mesh(bar30Geometry, bar32Material);
+bar32.position.set(-0.28, 0.6, -0.4);
+bar32.rotation.x = Math.PI / 2;
+group.add(bar32);
+const bar33 = new THREE.Mesh(bar30Geometry, bar32Material);
+bar33.position.set(-0.28, 0.6, 0.4);
+bar33.rotation.x = Math.PI / 2;
+group.add(bar33);
+
+return group;
+   
 }
