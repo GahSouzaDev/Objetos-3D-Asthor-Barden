@@ -227,9 +227,54 @@ function createCancela() {
     bar15.rotation.z = Math.PI / 2;
     group.add(bar15);    
     const bar16 = new THREE.Mesh(bar15Geometry, bar15Material);
-    bar16.position.set(1.025, 1.8, 0.6);
+    bar16.position.set(1.027, 1.85, 0.57);
     bar16.rotation.z = Math.PI / 2;
     group.add(bar16);
+
+    // Barra horizontal 2    
+    const bar17 = new THREE.Mesh(bar10Geometry, bar10Material);
+    bar17.position.set(1.05, 1.85, 0.88);
+    bar17.rotation.x = Math.PI / 2;
+    group.add(bar17);
+    // Barra horizontal 3   
+    const bar18 = new THREE.Mesh(bar10Geometry, bar10Material);
+    bar18.position.set(0.95, 1.85, 0.88);
+    bar18.rotation.x = Math.PI / 2;
+    group.add(bar18);
+    //Aredondamento
+    const bar19 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar19.position.set(1.05, 1.85, 1.24);
+    bar19.rotation.z = Math.PI / 2;
+    group.add(bar19);
+    const bar20 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar20.position.set(0.95, 1.85, 1.24);
+    bar20.rotation.z = Math.PI / 2;
+    group.add(bar20);
+    const bar21 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar21.position.set(0.95, 1.85, 0.54);
+    bar21.rotation.z = Math.PI / 2;
+    group.add(bar21);
+    const bar22 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar22.position.set(1.05, 1.85, 0.54);
+    bar22.rotation.z = Math.PI / 2;
+    group.add(bar22);
+
+    // Barra horizontal 4
+    const bar23Geometry = new THREE.BoxGeometry(0.05, 1, 0.2);
+    const bar23Material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+    const bar23 = new THREE.Mesh(bar23Geometry, bar23Material);
+    bar23.position.set(1, 1.85, 1.5);
+    bar23.rotation.x = Math.PI / 2;
+    group.add(bar23);
+    //Arredondamento
+    const bar24 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar24.position.set(1, 1.85, 2);
+    bar24.rotation.z = Math.PI / 2;
+    group.add(bar24);
+    const bar25 = new THREE.Mesh(bar6Geometry, bar6Material);
+    bar25.position.set(1, 1.85, 1);
+    bar25.rotation.z = Math.PI / 2;
+    group.add(bar25);
 
     return group;
 }
