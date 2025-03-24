@@ -29,10 +29,13 @@ function loadModel(modelName) {
         case 'cancela':
             currentModel = createCancela();
             break;
-        case 'ceres':
+        case 'convMovI':
             currentModel = new THREE.Group(); // Placeholder
             break;
-        case 'agricultor':
+        case 'convMovII':
+            currentModel = new THREE.Group(); // Placeholder
+            break;
+        case 'ceres':
             currentModel = new THREE.Group(); // Placeholder
             break;
     }
