@@ -30,13 +30,13 @@ function loadModel(modelName) {
             currentModel = createCancela();
             break;
         case 'convMovI':
-            currentModel = new THREE.Group(); // Placeholder
+            currentModel = createConvMovI();
             break;
         case 'convMovII':
-            currentModel = new THREE.Group(); // Placeholder
+            currentModel = createConvMovII();
             break;
         case 'ceres':
-            currentModel = new THREE.Group(); // Placeholder
+            currentModel = createCeres();
             break;
     }
     
@@ -45,7 +45,9 @@ function loadModel(modelName) {
 
 // Configuração inicial
 camera.position.z = 5;
-loadModel('cancela'); // Modelo padrão
+camera.position.y = 2;
+camera.position.x = 2;
+loadModel('convMovI'); // Modelo padrão
 
 // Animação
 function animate() {
