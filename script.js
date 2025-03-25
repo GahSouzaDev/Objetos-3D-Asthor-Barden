@@ -47,7 +47,7 @@ function loadModel(modelName) {
 camera.position.z = 5;
 camera.position.y = 2;
 camera.position.x = 2;
-loadModel('convMovI'); // Modelo padrão
+loadModel('cancela'); // Modelo padrão
 
 // Animação
 function animate() {
