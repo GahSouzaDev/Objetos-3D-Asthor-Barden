@@ -19,7 +19,7 @@ function createConvMovII() {
     const cilMaterial = new THREE.MeshBasicMaterial({ color: 0x653A15 });
     const cube2 = new THREE.Mesh(cube2Geometry, cube2Material);
     cube2.position.set(0.75, 1, 0);       
-    const cube3Geometry = new THREE.BoxGeometry(1, 3.5, 0.1);
+    const cube3Geometry = new THREE.BoxGeometry(1, 3, 0.1);
     const cube3Material = new THREE.MeshBasicMaterial({ color: mdfColor });
     const cube3 = new THREE.Mesh(cube3Geometry, cube3Material);
     cube3.position.set(0.75, 1.5, 0);
@@ -46,7 +46,7 @@ function createConvMovII() {
     const cube2DupMaterial = new THREE.MeshBasicMaterial({ color: darkerMdfColor });
     const cube2Dup = new THREE.Mesh(cube2DupGeometry, cube2DupMaterial);
     cube2Dup.position.set(0.75, 1, 0);       
-    const cube3DupGeometry = new THREE.BoxGeometry(1.01, 3.51, 0.09);
+    const cube3DupGeometry = new THREE.BoxGeometry(1.01, 3.01, 0.09);
     const cube3DupMaterial = new THREE.MeshBasicMaterial({ color: darkerMdfColor });
     const cube3Dup = new THREE.Mesh(cube3DupGeometry, cube3DupMaterial);
     cube3Dup.position.set(0.75, 1.5, 0);
@@ -72,9 +72,25 @@ function createConvMovII() {
    const cube9 = new THREE.Mesh(cube9Geometry, cube8Material);    
    cube9.position.set(0.75, 1.1, 0.52); 
 
+  // Criar a geometria do cubo
+const cube10Geometry = new THREE.BoxGeometry(1, 0.5, 1);
+
+// Carregar a textura
+const textureLoader = new THREE.TextureLoader();
+const cubeTexture = textureLoader.load('tx-md1.png'); // Substitua pelo caminho da sua imagem de textura
+
+// Criar o material com a textura
+const cube10Material = new THREE.MeshStandardMaterial({
+    map: cubeTexture, // Aplica a textura ao material
+    color: 0x7A4A1E   // Mantém a cor base, que pode tingir a textura
+});
+
+// Criar o mesh com geometria e material
+const cube10 = new THREE.Mesh(cube10Geometry, cube10Material);
+cube10.position.set(0.75, 2.75, 0.52);
 
     // Adicionar cubos ao grupo (original e duplicado)
-    group.add(cube, cube1, cube2, cube3, cube4, cube5, cube6,cube7, cube8, cube9, cubeDup, cube1Dup, cube2Dup, cube3Dup);
+    group.add(cube, cube1, cube2, cube3, cube4, cube5, cube6,cube7, cube8, cube9, cube10, cubeDup, cube1Dup, cube2Dup, cube3Dup);
 
     // Cilindros Originais
     const cylinderGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.1, 32);    
@@ -105,7 +121,7 @@ function createConvMovII() {
     // Adicionar cilindros ao grupo (original e duplicado)
     group.add(cylinder, cylinder1, cylinder2, cylinderDup, cylinder1Dup, cylinder2Dup);
 
-    // Furos1
+    // Furos
     const cylinder1Geometry = new THREE.CylinderGeometry(0.08, 0.08, 0.101, 32);
     const cylinder1Material = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const cylinder3 = new THREE.Mesh(cylinder1Geometry, cylinder1Material);
@@ -118,23 +134,13 @@ function createConvMovII() {
     const cylinder2Geometry = new THREE.CylinderGeometry(0.04, 0.04, 0.101, 32);
     const cylinder2Material = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const cylinder5 = new THREE.Mesh(cylinder2Geometry, cylinder2Material);
-    cylinder5.position.set(1, 2.5, 0);
+    cylinder5.position.set(1, 2.8, 0);
     cylinder5.rotation.x = Math.PI / 2;
     const cylinder6 = new THREE.Mesh(cylinder2Geometry, cylinder2Material);
-    cylinder6.position.set(0.55, 2.5, 0);
+    cylinder6.position.set(0.55, 2.8, 0);
     cylinder6.rotation.x = Math.PI / 2;     
 
-    // Furos2
-    const cylinder7Geometry = new THREE.CylinderGeometry(0.04, 0.04, 0.101, 32);
-    const cylinder7Material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    const cylinder7 = new THREE.Mesh(cylinder7Geometry, cylinder7Material);
-    cylinder7.position.set(1, 3, 0);
-    cylinder7.rotation.x = Math.PI / 2;
-    const cylinder8 = new THREE.Mesh(cylinder7Geometry, cylinder7Material);
-    cylinder8.position.set(0.55, 3, 0);
-    cylinder8.rotation.x = Math.PI / 2;
-
-       // Rodas
+    // Rodas
     // Materiais para as laterais (eixo Z) com cor original
     const cylinder3MaterialLateral = new THREE.MeshBasicMaterial({ color: 0x3F250E }); // Cor original Roda1 e Roda3
     const cylinder4MaterialLateral = new THREE.MeshBasicMaterial({ color: 0x3F250E }); // Cor original Roda2
@@ -351,7 +357,7 @@ function createConvMovII() {
     cylinder25.rotation.x = Math.PI / 1;
 
     // Adicionar os cilindros ao grupo
-    group.add(cylinder, cylinder1, cylinder2, cylinder3, cylinder4, cylinder5, cylinder6, cylinder7, cylinder8,
+    group.add(cylinder, cylinder1, cylinder2, cylinder3, cylinder4, cylinder5, cylinder6, 
              cylinder7Lateral, cylinder7Face, cylinder8Lateral, cylinder8Face, cylinder9Lateral, cylinder9Face,
              cylinder10Lateral, cylinder10Face,
              cylinder7LateralSmall, cylinder7FaceSmall, cylinder8LateralSmall, cylinder8FaceSmall, 
