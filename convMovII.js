@@ -71,10 +71,30 @@ function createConvMovII() {
    const cube9Geometry = new THREE.BoxGeometry(0.21, 0.601, 0.095);        
    const cube9 = new THREE.Mesh(cube9Geometry, cube8Material);    
    cube9.position.set(0.75, 1.1, 0.52); 
+   
+   const cube10Geometry = new THREE.BoxGeometry(0.6, 0.5, 0.101);        
+  const cube10Material = new THREE.MeshBasicMaterial({ color:  0x3F250E });  
+  const cube10 = new THREE.Mesh(cube10Geometry, cube4Material);    
+  cube10.position.set(0.75, 2.5, 0.22); 
+   // Corpo Original
+   const cube11Geometry = new THREE.BoxGeometry(0.61, 0.51, 0.095);        
+   const cube11 = new THREE.Mesh(cube11Geometry, cube10Material);    
+   cube11.position.set(0.75, 2.5, 0.22); 
+   cube10.rotation.x = Math.PI / 2;
+   cube11.rotation.x = Math.PI / 2;
+
+   const cube12 = new THREE.Mesh(cube10Geometry, cube4Material);    
+   cube12.position.set(0.75, 3, 0.22); 
+    // Corpo Original
+            
+    const cube13 = new THREE.Mesh(cube11Geometry, cube10Material);    
+    cube13.position.set(0.75, 3, 0.22); 
+    cube12.rotation.x = Math.PI / 2;
+    cube13.rotation.x = Math.PI / 2;
 
 
     // Adicionar cubos ao grupo (original e duplicado)
-    group.add(cube, cube1, cube2, cube3, cube4, cube5, cube6,cube7, cube8, cube9, cubeDup, cube1Dup, cube2Dup, cube3Dup);
+    group.add(cube, cube1, cube2, cube3, cube4, cube5, cube6,cube7, cube8, cube9, cube10, cube11, cube12, cube13,  cubeDup, cube1Dup, cube2Dup, cube3Dup);
 
     // Cilindros Originais
     const cylinderGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.1, 32);    
@@ -350,10 +370,27 @@ function createConvMovII() {
     cylinder25.position.set(0.75, 2.1, 0.52);
     cylinder25.rotation.x = Math.PI / 1;
 
+    //Mecanismo superior
+    const cylinder30GeometryTiny = new THREE.CylinderGeometry(0.31, 0.31, 0.09, 32);
+    const cylinder40GeometryTiny = new THREE.CylinderGeometry(0.3, 0.3, 0.1, 32);
+    const cylinder20LateralTiny = new THREE.Mesh(cylinder30GeometryTiny, cylinder3MaterialLateral);
+    cylinder20LateralTiny.position.set(0.75, 3, 0.52);
+    cylinder20LateralTiny.rotation.x = Math.PI / 1;
+    const cylinder20FaceTiny = new THREE.Mesh(cylinder40GeometryTiny, cylinder3MaterialEscuro);
+    cylinder20FaceTiny.position.set(0.75, 3, 0.52);
+    cylinder20FaceTiny.rotation.x = Math.PI / 1;
+
+    const cylinder21LateralTiny = new THREE.Mesh(cylinder30GeometryTiny, cylinder3MaterialLateral);
+    cylinder21LateralTiny.position.set(0.75, 2.5, 0.52);
+    cylinder21LateralTiny.rotation.x = Math.PI / 1;
+    const cylinder21FaceTiny = new THREE.Mesh(cylinder40GeometryTiny, cylinder3MaterialEscuro);
+    cylinder21FaceTiny.position.set(0.75, 2.5, 0.52);
+    cylinder21FaceTiny.rotation.x = Math.PI / 1;
+
     // Adicionar os cilindros ao grupo
     group.add(cylinder, cylinder1, cylinder2, cylinder3, cylinder4, cylinder5, cylinder6, cylinder7, cylinder8,
              cylinder7Lateral, cylinder7Face, cylinder8Lateral, cylinder8Face, cylinder9Lateral, cylinder9Face,
-             cylinder10Lateral, cylinder10Face,
+             cylinder10Lateral, cylinder20LateralTiny, cylinder21LateralTiny, cylinder20FaceTiny, cylinder21FaceTiny, cylinder10Face,
              cylinder7LateralSmall, cylinder7FaceSmall, cylinder8LateralSmall, cylinder8FaceSmall, 
              cylinder9LateralSmall, cylinder9FaceSmall,
              cylinder7LateralTiny, cylinder7FaceTiny, cylinder8LateralTiny, cylinder8FaceTiny,
