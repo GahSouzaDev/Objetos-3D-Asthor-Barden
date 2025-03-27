@@ -1,4 +1,3 @@
-
 function createConvMovII() {
     const group = new THREE.Group();
     
@@ -388,6 +387,14 @@ function createConvMovII() {
     cylinder21FaceTiny.position.set(0.75, 2.5, 0.52);
     cylinder21FaceTiny.rotation.x = Math.PI / 1;
 
+
+    const cylinder71 = new THREE.Mesh(cylinder7Geometry, cylinder7Material);
+    cylinder71.position.set(-0.5, -0.8, 0.2);
+    cylinder71.rotation.x = Math.PI / 1;
+    const cylinder81 = new THREE.Mesh(cylinder7Geometry, cylinder7Material);
+    cylinder81.position.set(-0.9, -0.8, 0.2);
+    cylinder81.rotation.x = Math.PI / 1;
+
     // Adicionar os cilindros ao grupo
     group.add(cylinder, cylinder1, cylinder2, cylinder3, cylinder4, cylinder5, cylinder6, cylinder7, cylinder8,
              cylinder7Lateral, cylinder7Face, cylinder8Lateral, cylinder8Face, cylinder9Lateral, cylinder9Face,
@@ -402,7 +409,7 @@ function createConvMovII() {
              cylinder16LateralTiny, cylinder16FaceTiny,
              cylinder17LateralTiny, cylinder17FaceTiny, cylinder18LateralTiny, cylinder18FaceTiny,
              cylinder19LateralTiny, cylinder19FaceTiny,
-             cylinder20, cylinder21, cylinder22, cylinder23, cylinder24, cylinder25);
+             cylinder20, cylinder21, cylinder22, cylinder23, cylinder24, cylinder25, cylinder71, cylinder81);
 
              group.position.y = -0.5;
     return group;
