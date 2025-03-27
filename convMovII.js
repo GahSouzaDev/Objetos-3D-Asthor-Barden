@@ -1,3 +1,4 @@
+
 function createConvMovII() {
     const group = new THREE.Group();
     
@@ -403,5 +404,7 @@ function createConvMovII() {
              cylinder19LateralTiny, cylinder19FaceTiny,
              cylinder20, cylinder21, cylinder22, cylinder23, cylinder24, cylinder25);
 
+             group.position.y = -0.5;
     return group;
+    
 }
