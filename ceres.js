@@ -955,7 +955,8 @@ cylinder103.rotation.z = Math.PI / 2;
 
     // Ajuste final da posição do grupo no espaço
     group.position.y = -0.2;
-    group.position.z = -4;
+    group.position.z = -2;
+    group.rotation.y = -1;
    
 
     return group;
