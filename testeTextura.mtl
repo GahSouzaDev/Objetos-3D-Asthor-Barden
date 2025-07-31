@@ -1,0 +1,28 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Cinder_Block
+Ka 0.000000 0.000000 0.000000
+Kd 0.749020 0.721569 0.670588
+Ks 0.330000 0.330000 0.330000
+map_Kd Cinder_Block.jpg
+
+newmtl Beadboard
+Ka 0.000000 0.000000 0.000000
+Kd 0.854902 0.560784 0.352941
+Ks 0.330000 0.330000 0.330000
+map_Kd Beadboard.jpg
+
+newmtl Translucent_Glass_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl Roofing_Scalloped
+Ka 0.000000 0.000000 0.000000
+Kd 0.729412 0.541176 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd Roofing_Scalloped.jpg
+
