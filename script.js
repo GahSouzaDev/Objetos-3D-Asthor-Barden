@@ -38,6 +38,9 @@ function loadModel(modelName) {
         case 'ceres':
             currentModel = createCeres();
             break;
+        case 'elevador':
+            currentModel = createElevador();
+            break;
     }
     
     scene.add(currentModel);
