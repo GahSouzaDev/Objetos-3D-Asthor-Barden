@@ -5,7 +5,7 @@ function createElevador() {
     const mtlLoader = new THREE.MTLLoader();
     
     mtlLoader.load(
-        'testeTextura.mtl',
+        'elevador_v2b.mtl',
         function(materials) {
             console.log('✅ MTL CARREGADO!');
             materials.preload();
@@ -14,7 +14,7 @@ function createElevador() {
             objLoader.setMaterials(materials);
             
             objLoader.load(
-                'elevador_v2a.obj',
+                'elevador_v2b.obj', // ✅ ARQUIVO CORRETO AGORA!
                 function(object) {
                     console.log('✅ OBJ CARREGADO COM MTL!');
                     
@@ -24,32 +24,40 @@ function createElevador() {
                     const center = box.getCenter(new THREE.Vector3());
                     object.position.sub(center);
                     
-                    // VERIFICAR SE AS TEXTURAS FORAM APLICADAS
-                    let hasTexture = false;
+                    // ✅ FORÇA A APLICAÇÃO DAS TEXTURAS DO MTL
                     object.traverse(function(child) {
                         if (child.isMesh) {
                             child.castShadow = true;
                             child.receiveShadow = true;
                             
-                            if (child.material && child.material.map) {
-                                hasTexture = true;
-                                console.log('✅ TEXTURA ENCONTRADA!');
+                            // DEBUG: Mostra qual material está sendo usado
+                            if (child.material) {
+                                console.log('🎨 MATERIAL:', child.material.name);
+                                if (child.material.map) {
+                                    console.log('🖼️ TEXTURA ENCONTRADA!');
+                                } else {
+                                    console.log('❌ SEM TEXTURA NO MATERIAL');
+                                }
                             }
                         }
                     });
                     
-                    if (!hasTexture) {
-                        console.log('❌ SEM TEXTURA - APLICANDO MANUALMENTE');
-                        applyTexturesManually(object);
-                    }
-                    
                     group.add(object);
                     console.log('✅ ELEVADOR ADICIONADO!');
+                },
+                function(progress) {
+                    console.log('📦 CARREGANDO OBJ...');
+                },
+                function(error) {
+                    console.error('❌ ERRO OBJ:', error);
                 }
             );
         },
-        undefined,
+        function(progress) {
+            console.log('�� CARREGANDO MTL...');
+        },
         function(error) {
+            console.error('❌ ERRO MTL:', error);
             console.log('❌ ERRO MTL - CARREGANDO SEM TEXTURA');
             loadWithoutMTL(group);
         }
@@ -59,52 +67,11 @@ function createElevador() {
     return group;
 }
 
-// FUNÇÃO PARA APLICAR TEXTURAS MANUALMENTE
-function applyTexturesManually(object) {
-    const textureLoader = new THREE.TextureLoader();
-    
-    // Carrega as 3 texturas
-    const cinderTexture = textureLoader.load('Cinder_Block.jpg');
-    const beadTexture = textureLoader.load('Beadboard.jpg');
-    const roofTexture = textureLoader.load('Roofing_Scalloped.jpg');
-    
-    let meshCount = 0;
-    
-    object.traverse(function(child) {
-        if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-            
-            // Aplica texturas diferentes para cada mesh
-            let texture;
-            switch(meshCount % 3) {
-                case 0:
-                    texture = cinderTexture;
-                    break;
-                case 1:
-                    texture = beadTexture;
-                    break;
-                case 2:
-                    texture = roofTexture;
-                    break;
-            }
-            
-            child.material = new THREE.MeshPhongMaterial({
-                map: texture,
-                shininess: 30
-            });
-            
-            meshCount++;
-            console.log(`✅ TEXTURA ${meshCount} APLICADA MANUALMENTE!`);
-        }
-    });
-}
-
 // FUNÇÃO FALLBACK SEM MTL
 function loadWithoutMTL(group) {
     const loader = new THREE.OBJLoader();
     
-    loader.load('elevador_v2a.obj', function(object) {
+    loader.load('elevador_v2b.obj', function(object) { // ✅ ARQUIVO CORRETO!
         console.log('✅ OBJ CARREGADO SEM MTL!');
         
         object.scale.setScalar(0.01);
@@ -113,10 +80,23 @@ function loadWithoutMTL(group) {
         const center = box.getCenter(new THREE.Vector3());
         object.position.sub(center);
         
-        // APLICA TEXTURAS MANUALMENTE
-        applyTexturesManually(object);
+        // ✅ APLICA APENAS A TEXTURA MDF
+        const textureLoader = new THREE.TextureLoader();
+        const mdfTexture = textureLoader.load('MDF.jpg');
+        
+        object.traverse(function(child) {
+            if (child.isMesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                child.material = new THREE.MeshPhongMaterial({
+                    map: mdfTexture,
+                    shininess: 30
+                });
+                console.log('🎨 TEXTURA MDF APLICADA MANUALMENTE!');
+            }
+        });
         
         group.add(object);
-        console.log('✅ ELEVADOR COM TEXTURAS MANUAIS ADICIONADO!');
+        console.log('✅ ELEVADOR FALLBACK ADICIONADO!');
     });
 }
